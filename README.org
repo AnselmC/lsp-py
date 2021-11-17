@@ -18,7 +18,10 @@ The easiest way to do so is using [[http:github.com/raxod502/straight.el][straig
   (use-package lsp-py
     :init
     (add-to-list 'lsp-enabled-clients 'lsp-py)
-    :straight (lsp-py :type git :host github :repo "AnselmC/lsp-py.el"))
+    ;; with https
+    ;;:straight (lsp-py :type git :host github :repo "AnselmC/lsp-py"))
+    ;; with ssh
+    :straight (lsp-py :type git :host nil :repo "git@github.com:AnselmC/lsp-py"))
 #+end_src
 ** Disclaimer
 I haven't tested all the different configuration options, so some options may not be working.
