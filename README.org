@@ -1,0 +1,25 @@
+* Lsp-py
+Emacs client for the currently maintained [[http:github.com/python-lsp/python-lsp-server][python-lsp-server]].
+Use with [[http:github.com/emacs-lsp/lsp-mode][lsp-mode]] and get the most out of developing python in Emacs.
+
+** Features
+See the above linked LSP implementation for a list of features.
+You can customize all options listed [[http:github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md][here]]. Once you've installed `lsp-py` you can find and customize them via `M-x customize-group RET lsp-py`.
+Features include linting, renaming, reference finding, documentation.
+
+** Installation
+First, you'll need the language server implementation:
+#+begin_src shell
+  pip install python-lsp-server
+#+end_src
+Currently, you'll need to clone this repo and install it manually.
+The easiest way to do so is using [[http:github.com/raxod502/straight.el][straight.el]] with [[http:github.com/jwiegley/use-package][use-package]]:
+#+begin_src elisp
+  (use-package lsp-py
+    :init
+    (add-to-list 'lsp-enabled-clients 'lsp-py)
+    :straight (lsp-py :type git :host github :repo "AnselmC/lsp-py.el"))
+#+end_src
+** Disclaimer
+I haven't tested all the different configuration options, so some options may not be working.
+
