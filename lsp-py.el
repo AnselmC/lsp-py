@@ -58,7 +58,7 @@
 (defun lsp-py/install-rope-add-on()
   (lsp-py/install-pip-package "pylsp-rope"))
 
-###autoload
+;;;###autoload
 (defun lsp-py/install-language-server ()
   "Installs language server and optional add-ons"
   (interactive)
