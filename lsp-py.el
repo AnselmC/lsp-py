@@ -34,6 +34,45 @@
   :group 'lsp-mode
   :link '(url-link "https://github.com/AnselmC/lsp-py"))
 
+(defun lsp-py/install-pip-package (package)
+  (shell-command (concat "pip3 install " package)))
+
+(defun lsp-py/install-python-language-server ()
+  (lsp-py/install-pip-package "'python-lsp-server[all]'"))
+
+(defun lsp-py/install-flake8-add-on()
+  (lsp-py/install-pip-package "pyls-flake8"))
+
+(defun lsp-py/install-mypy-add-on()
+  (lsp-py/install-pip-package "pylsp-mypy"))
+
+(defun lsp-py/install-isort-add-on()
+  (lsp-py/install-pip-package "pyls-isort"))
+
+(defun lsp-py/install-black-add-on()
+  (lsp-py/install-pip-package "python-lsp-black"))
+
+(defun lsp-py/install-memestra-add-on()
+  (lsp-py/install-pip-package "pyls-memestra"))
+
+(defun lsp-py/install-rope-add-on()
+  (lsp-py/install-pip-package "pylsp-rope"))
+
+###autoload
+(defun lsp-py/install-language-server ()
+  "Installs language server and optional add-ons"
+  (interactive)
+  (let ((add-ons-to-install-fn
+         '(("flake8" . lsp-py/install-flake8-add-on)
+           ("mypy" . lsp-py/install-mypy-add-on)
+           ("isort" . lsp-py/install-isort-add-on)
+           ("black" . lsp-py/install-black-add-on)
+           ("memestra" . lsp-py/install-memestra-add-on)
+           ("rope" . lsp-py/install-rope-add-on)))
+        (add-ons (completing-read-multiple "Select add-ons: " '(flake8 mypy isort black memestra rope))))
+    (lsp-py/install-python-language-server)
+    (mapcar (lambda (add-on) (funcall (cdr (assoc add-on add-ons-to-install-fn)))) add-ons)))
+
 (defcustom lsp-py-executable "pylsp"
   "The python-lsp-server executable (installed via `pip install python-lsp-server`)"
   :type 'string
